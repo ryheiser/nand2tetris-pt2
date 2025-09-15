@@ -13,6 +13,29 @@ def compact_text(text):
             compacted.append(line)
     return compacted
 
+def find_command_type(command):
+    arithmetic_commands = {'add', 'sub', 'neg', 'eq', 'gt', 'lt', 'and', 'or', 'not'}
+    if command in arithmetic_commands:
+        return 'C_ARITHMETIC'
+    elif command.startswith('push'):
+        return 'C_PUSH'
+    elif command.startswith('pop'):
+        return 'C_POP'
+    elif command.startswith('label'):
+        return 'C_LABEL'
+    elif command.startswith('goto'):
+        return 'C_GOTO'
+    elif command.startswith('if-goto'):
+        return 'C_IF'
+    elif command.startswith('function'):
+        return 'C_FUNCTION'
+    elif command.startswith('call'):
+        return 'C_CALL'
+    elif command.startswith('return'):
+        return 'C_RETURN'
+    else:
+        return 'C_UNKNOWN'
+
 
 
 def main():
@@ -20,15 +43,10 @@ def main():
     # Further implementation will go here
     text = read_vm_file("/home/ryheiser/Documents/Development/nand2tetris-pt2/07/BasicTest/BasicTest.vm")
 
-    #Print initial text
-    print("Initial text:")
-    for line in text:
-        print(line.strip())
-
-    text = compact_text(text)
-    print("\nCompacted text:")
-    for line in text:
-        print(line)
+    commands = compact_text(text)
+    for command in commands:
+        type = find_command_type(command)
+        print(f"Type: {type} '{command}")
 
 if __name__ == "__main__":
     main()
