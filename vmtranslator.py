@@ -41,12 +41,12 @@ def find_command_type(command):
 def main():
     print("VM Translator started")
     # Further implementation will go here
-    text = read_vm_file("/home/ryheiser/Documents/Development/nand2tetris-pt2/07/BasicTest/BasicTest.vm")
+    text = read_vm_file("07\BasicTest\BasicTest.vm")
 
     commands = compact_text(text)
     for command in commands:
         type = find_command_type(command)
-        print(f"Type: {type} '{command}")
+        print(f"Type: {type} '{command}'")
 
 if __name__ == "__main__":
     main()
