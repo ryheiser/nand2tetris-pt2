@@ -54,7 +54,7 @@ class Parser:
     def arg1(self):
         # Return the first argument of the current command
         if self.commandType() == 'C_RETURN':
-            raise ValueError("C_RETURN does not have arguments")
+            return None  # C_RETURN has no arguments
         parts = self.current_command.split()
         if self.commandType() == 'C_ARITHMETIC':
             return parts[0]  # The command itself is the argument
@@ -67,4 +67,4 @@ class Parser:
             parts = self.current_command.split()
             return int(parts[2])  # The second argument is an integer
         else:
-            raise ValueError(f"{self.commandType()} does not have a second argument")
+            return None  # No second argument
